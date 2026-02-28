@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para a Minha Giovanna 💖</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, #ff007f, #4a0026);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        .container {
+            z-index: 2;
+            padding: 40px;
+            background: rgba(255, 105, 180, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 2px solid #ff69b4;
+            box-shadow: 0 0 30px rgba(255, 20, 147, 0.4);
+            max-width: 80%;
+            width: 500px;
+            margin: 20px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 10px; color: #fff; text-shadow: 0 0 15px #ff1493; }
+        
+        .fade-in { animation: fadeIn 0.8s ease-in forwards; }
+
+        .btn-proximo {
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+            align-self: center;
+        }
+
+        .btn-proximo:hover { transform: scale(1.05); box-shadow: 0 0 20px #ff69b4; }
+
+        .texto-agradecimento {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #fff0f5;
+            min-height: 100px;
+        }
+
+        #area-presente { display: none; }
+
+        .banner-leon {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            border: 3px solid #ff69b4;
+            margin: 15px 0;
+        }
+
+        .aviso-steam {
+            background-color: #2d1a2d;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #ff1493;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .heart {
+            position: absolute;
+            top: -10%;
+            font-size: 25px;
+            animation: fall linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-container">
+        <h1 id="titulo">Para a Giovanna 💖</h1>
+        
+        <div id="conteudo-dinamico" class="texto-agradecimento fade-in">
+            Momo, antes de qualquer coisa, eu queria te dizer o quanto você é especial...
+        </div>
+
+        <button class="btn-proximo" id="btnAcao" onclick="proximoPasso()">Clique aqui, amor  muahahahah ✨</button>
+
+        <div id="area-presente">
+            <div class="texto-agradecimento">
+                Espero que esse novo ano seja cheio de conquistas, sorrisos e muitos momentos incríveis juntos!
+            </div>
+            <img src="https://www.takuminosekai.com/wp-content/uploads/2025/12/Resident-Evil-Requiem-Leon-Key-Art.webp" alt="Leon S. Kennedy" class="banner-leon">
+            <div class="aviso-steam">
+                🎮 <strong>O Leon já está pronto!</strong> <br>
+                Diferente de você que nem viu que já está na sua Steam.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let passoAtual = 0;
+        const textos = [
+            "Obrigado por todo o <b>AMOR</b> que você me dá. Você transforma meus dias e faz eu me sentir a pessoa mais sortuda do mundo. ❤️",
+            "Obrigado pela <b>PAZ</b> que você traz pro meu coração. Estar com você é o meu lugar seguro, onde tudo faz sentido. 🌿",
+            "Obrigado pela sua <b>AMIZADE</b>. Além de minha namorada, você é minha melhor parceira de aventuras, risadas e conversas infinitas. 🤝",
+            "Você é a pessoa que faz tudo ficar mais colorido. E por isso, você merece um mimo especial... 🎁"
+        ];
+
+        const botoes = [
+            "E tem mais...",
+            "E não para por aí...",
+            "Só mais uma coisa...",
+            "O QUE SERÁ QUE TEM AQUI??? ✨"
+        ];
+
+        function proximoPasso() {
+            const display = document.getElementById('conteudo-dinamico');
+            const btn = document.getElementById('btnAcao');
+            const titulo = document.getElementById('titulo');
+
+            if (passoAtual < textos.length) {
+                // Efeito de fade ao mudar o texto
+                display.classList.remove('fade-in');
+                void display.offsetWidth; // Trigger reflow
+                display.classList.add('fade-in');
+
+                display.innerHTML = textos[passoAtual];
+                btn.innerHTML = botoes[passoAtual];
+                passoAtual++;
+            } else {
+                // Revelar Presente Final
+                titulo.innerHTML = "Feliz Aniversário! 🎉";
+                display.style.display = 'none';
+                btn.style.display = 'none';
+                document.getElementById('area-presente').style.display = 'block';
+                document.getElementById('area-presente').classList.add('fade-in');
+                chuvaDeCoracoes();
+            }
+        }
+
+        function criarCoracao() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            const icons = ['💖', '🌸', '✨', '🌹', '🎀'];
+            heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            heart.style.opacity = Math.random() + 0.3;
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 6000);
+        }
+
+        function chuvaDeCoracoes() {
+            for(let i=0; i<50; i++) {
+                setTimeout(criarCoracao, i * 100);
+            }
+        }
+
+        // Inicia alguns corações lentos no fundo desde o começo
+        setInterval(criarCoracao, 1500);
+    </script>
+</body>
+</html>
